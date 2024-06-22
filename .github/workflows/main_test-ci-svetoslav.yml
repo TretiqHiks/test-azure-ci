@@ -48,4 +48,4 @@ jobs:
         app-name: 'test-ci-svetoslav'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_fb236825d92949db81d7dca09011ef73 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_16a26c09571842119e9e1b4be1a0ccf7 }}/tretiqhiks/ci-azure-test:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_16a26c09571842119e9e1b4be1a0ccf7 }}/tretiqhiks/ci-azure-test:latest'
