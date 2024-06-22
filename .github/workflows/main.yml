@@ -30,6 +30,7 @@ jobs:
     
   push_to_registry:
     name: Push to DockerHub and deploy on Azure
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
