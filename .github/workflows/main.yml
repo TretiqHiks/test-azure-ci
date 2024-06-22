@@ -29,7 +29,7 @@ jobs:
       run: mvn clean install
     
   push_to_registry:
-    name: Push to DockerHub and deploy on Azure
+    name: Push to DockerHub
     needs: build
     runs-on: ubuntu-latest
 
@@ -71,5 +71,5 @@ jobs:
             app-name: 'test-ci-svetoslav'
             slot-name: 'production'
             publish-profile: ${{ secrets.AzureAppService_PublishProfile_fb236825d92949db81d7dca09011ef73 }}
-            images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_16a26c09571842119e9e1b4be1a0ccf7 }}/tretiqhiks/ci-azure-test:latest'
+            images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_16a26c09571842119e9e1b4be1a0ccf7 }}/ci-azure-test:latest'
   
