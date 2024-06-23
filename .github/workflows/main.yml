@@ -9,7 +9,7 @@ on:
   
 jobs:
   build:
-    name: Build and test
+    name: Build and Test App
     permissions: write-all
     runs-on: ubuntu-latest
 
@@ -57,21 +57,21 @@ jobs:
       - name: Docker push
         run: docker push tretiqhiks/ci-azure-test:latest
   deploy_to_staging:
+     name: Deploy App to Staging
      runs-on: ubuntu-latest
      needs: push_to_registry
      environment:
        name: 'production'
        url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-     steps:
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'test-ci-svetoslav'
-          slot-name: 'staging'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_fb236825d92949db81d7dca09011ef73 }}
-          images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_16a26c09571842119e9e1b4be1a0ccf7 }}/ci-azure-test:latest'
-        
+     steps:    
+      - name: Set Docker Image on Web App
+        run: |
+          az webapp config container set --name test-ci-svetoslav --resource-group test-ci \
+            --docker-custom-image-name docker.io/tretiqhiks/ci-azure-test:latest \
+            --docker-registry-server-url https://docker.io \
+            --docker-registry-server-user ${{ secrets.DOCKERHUB_USERNAME }} \
+            --docker-registry-server-password ${{ secrets.DOCKERHUB_PASSWORD }} \
+            --slot staging
       - name: Health Check Staging
         run: |
             for i in {1..5}; do
