@@ -13,4 +13,15 @@ public class TestController {
     public String testEndpoint(){
         return "Test";
     }
+
+    @GetMapping("/staging")
+    public String testStaging(){
+        return "Staging health check passed!";
+    }
+
+    @GetMapping("/production")
+    public String testProduction(){
+        return "Production health check passed!";
+    }
+
 }
