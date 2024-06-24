@@ -19,7 +19,7 @@ public class TestController {
         return "Staging health check passed!";
     }
 
-    @GetMapping("/production")
+    @GetMapping("/productionn")
     public String testProduction(){
         return "Production health check passed!";
     }
